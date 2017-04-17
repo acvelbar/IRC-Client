@@ -49,6 +49,35 @@ int port = 3048;
 bool loggedIn = false;
 bool roomChange = false;
 
+int open_client(char * host, int port) {
+	struct sockaddr_in socketAddress;
+	memset((char *)&socketAddress, 0, sizeof(socketAddress));
+	socketAddress.sin_family = AF_INET;
+	socketAddress.sin_port = htons((u_short)port);
+	struct hostent *ptrh = gethostbyname(host);
+	if (ptrh == NULL) {
+	    perror("gethostbyname");
+	    exit(1);
+	}
+	memcpy(&socketAddress.sin_addr, ptrh->h_addr, ptrh->h_length);
+	struct  protoent *ptrp = getprotobyname("tcp");
+  	if (ptrp == NULL) {
+      		perror("getprotobyname");
+          	exit(1);
+	}
+	int sock = socket(PF_INET, SOCK_STREAM, ptrp->p_proto);
+	if (sock < 0) {
+		perror("socket");
+	        exit(1);
+        }
+	if (connect(sock, (struct sockaddr *)&socketAddress,
+		sizeof(socketAddress)) < 0) {
+	        	perror("connect");
+			exit(1);
+	}
+	return sock;
+}
+
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;

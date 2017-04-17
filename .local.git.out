@@ -127,3 +127,5 @@ After doing this, you may fix the identity used for this commit with:
 [master ba92a48] Make IRCclient
  3 files changed, 53 insertions(+)
  rewrite IRCClient (94%)
+[master 3688b4a] Make IRCclient
+ 3 files changed, 4 insertions(+), 1 deletion(-)
