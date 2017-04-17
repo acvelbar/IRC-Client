@@ -124,3 +124,6 @@ After doing this, you may fix the identity used for this commit with:
  rewrite entry (77%)
  rewrite panned (83%)
  rewrite timer (72%)
+[master ba92a48] Make IRCclient
+ 3 files changed, 53 insertions(+)
+ rewrite IRCClient (94%)

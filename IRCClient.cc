@@ -41,7 +41,7 @@ vector<string> roomVec;
 vector<string> roomVecNew;
 GtkWidget *roomUser;
 
-char * host = "localhost";
+const char * host = "localhost";
 char * user;
 char * password;
 char * args;
