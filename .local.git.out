@@ -116,3 +116,11 @@ After doing this, you may fix the identity used for this commit with:
  4 files changed, 189 insertions(+), 2 deletions(-)
  create mode 100755 IRCClientTimer
  create mode 100644 IRCClientTimer.cc
+[master e2b7bee] Make IRCclient
+ 9 files changed, 16 insertions(+)
+ rewrite IRCClient (82%)
+ rewrite IRCClientTimer (83%)
+ rewrite TestIRCServer (61%)
+ rewrite entry (77%)
+ rewrite panned (83%)
+ rewrite timer (72%)

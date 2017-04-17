@@ -1,8 +1,53 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <time.h>
+#include <curses.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+#define MAX_RESPONSE (20 * 1024)
+
+using namespace std;
 
 GtkListStore * list_rooms;
+GtkWidget *window;
+GtkWidget *tree_view;
+GtkWidget *messages_1;
+GtkListStore * list_users;
+GtkWidget *table;
+GtkTreeSelection *treeSel;
+GtkWidget *view;
+GtkWidget *viewUser;
+GtkWidget *userName; //entry
+GtkWidget *passWord; //entry
+GtkWidget *currentStatus; //label
+GtkWidget *entryRoom; //entry
+GtkWidget *messageEntry;
+vector<string> roomVec;
+vector<string> roomVecNew;
+GtkWidget *roomUser;
+
+char * host = "localhost";
+char * user;
+char * password;
+char * args;
+int port = 3048;
+bool loggedIn = false;
+bool roomChange = false;
 
 void update_list_rooms() {
     GtkTreeIter iter;
