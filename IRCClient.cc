@@ -467,7 +467,7 @@ int main( int   argc,
     GdkColor color3;
     GtkWidget *status;
     GtkWidget *labelMsg;
-    GtkWidget *labalPass;
+    GtkWidget *labelPass;
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
@@ -510,21 +510,121 @@ int main( int   argc,
     gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
-//*720
-    myMessage = create_text ("I am fine, thanks and you?\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
-    gtk_widget_show (myMessage);
+//720
 
-    // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
-    GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
-    gtk_widget_show (send_button);
+    messages_1 = create_text ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+    gtk_widget_show (messages_1);
+
+    entryRoom = gtk_entry_new_with_max_length(0);
+    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 6, 7);
+    gtk_widget_show(entryRoom);
     
+    labelRoom = gtk_label_new("Enter room name:");
+    gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
+
+    gtk_widget_show(labelRoom);
+    gdk_color_parse ("black", &color3);
+    gtk_widget_modify_bg (GTK_WIDGET(labelRoom), GTK_STATE_NORMAL, &color3);
+
+    GtkWidget *send_button = gtk_button_new_with_label ("Send");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 13, 14); 
+    gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
+    g_signal_connect (send_button, "clicked", G_CALLBACK (send_msg), NULL);
+    gtk_widget_show (send_button); 
+    messageEntry = gtk_entry_new_with_max_length(0);
+    gtk_table_attach_defaults (GTK_TABLE (table), messageEntry, 2, 10, 11, 13);
+    gtk_widget_show(messageEntry);
+
+    GtkWidget *create_room2 = gtk_button_new_with_label ("Create Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), create_room2, 0, 2, 7, 8); 
+    gtk_widget_modify_bg (GTK_WIDGET(create_room2), GTK_STATE_NORMAL, &color); 
+    gtk_widget_show (create_room2);
+    g_signal_connect (create_room2, "clicked", G_CALLBACK (create_room), NULL);
+
+    GtkWidget *enter_room_Btn = gtk_button_new_with_label ("Enter Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), enter_room_Btn, 0, 2, 8, 9); 
+    gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(enter_room_Btn), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (enter_room_Btn); 
+    g_signal_connect (enter_room_Btn, "clicked", G_CALLBACK (enter_room), NULL);
+
+    GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 9, 10); 
+    
+    gtk_widget_modify_bg (GTK_WIDGET(leave_room_Btn), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (leave_room_Btn); 
+    g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);
+    
+    GtkWidget *login_button = gtk_button_new_with_label ("Log In");
+    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 10, 12, 12, 13);
+    
+    gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (login_button);
+    g_signal_connect (login_button, "clicked", G_CALLBACK (login), NULL);
+
+    GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
+    gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 13, 14);
+    gtk_widget_modify_bg (GTK_WIDGET(signup_button), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (signup_button);  
+    g_signal_connect (signup_button, "clicked", G_CALLBACK (signup), (gpointer) "Signup");
+	
+    labelRoom = gtk_label_new("Enter User Name:");
+    gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelRoom,9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
+
+    userName = gtk_entry_new_with_max_length(0);
+    gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
+    gtk_widget_show(userName);
+	   
+    labelUser = gtk_label_new("Username:");
+    gtk_misc_set_alignment(GTK_MISC(labelUser),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelUser,10, 12, 7, 8, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(labelUser);
+
+    labelPass = gtk_label_new("Password:");
+    gtk_misc_set_alignment(GTK_MISC(labelPass),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelPass,10, 12, 9, 10, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(labelPass);
+
+    passWord = gtk_entry_new_with_max_length(0);
+    gtk_table_attach_defaults (GTK_TABLE (table), passWord, 10, 12, 9, 11);
+    gtk_widget_show(passWord);
+
+    GtkWidget *check = gtk_check_button_new_with_label ("Editable");
+    g_signal_connect (check, "toggled", G_CALLBACK (entry_toggle_visibility), passWord);
+    GtkWidget *image = gtk_image_new_from_file("new-user-image-default.png");
+    gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
+    gtk_widget_show (image);
+
+    status = gtk_label_new("Status:");
+    gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(status);
+
+    currentStatus = gtk_label_new("Login/Signup");
+    gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 11, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(currentStatus);
+
+
+    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
+    g_signal_connect(treeSel, "changed",  
+    G_CALLBACK(room_changed), currentStatus); 
+
     gtk_widget_show (table);
     gtk_widget_show (window);
+    gtk_widget_hide (window);
+    gtk_widget_show (window);
+    gtk_window_set_title(GTK_WINDOW(window), "IRCClient");
+
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
-
+    
     return 0;
 }
 
