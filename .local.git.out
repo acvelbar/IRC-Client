@@ -161,3 +161,5 @@ After doing this, you may fix the identity used for this commit with:
 [master 0b3d3d0] Make IRCclient
  4 files changed, 4 insertions(+), 2 deletions(-)
  create mode 100644 .IRCClient.cc.swp
+[master c1ad9ad] Make IRCclient
+ 3 files changed, 5 insertions(+), 2 deletions(-)

@@ -45,7 +45,7 @@ char * host = strdup("localhost");
 char * user;
 char * password;
 char * args;
-int port = 3048;
+int port = 3052;
 bool loggedIn = false;
 bool roomChange = false;
 
