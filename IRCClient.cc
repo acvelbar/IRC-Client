@@ -312,11 +312,11 @@ void update_messages(GtkWidget *widget, gpointer text)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *tmodel;
-	char *roomName;
+	gchar *roomName;
 	int i;
 	GtkTextBuffer *buffer;
 	vector<string> userRoomVec;
-	if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(treeSel), &tmodel, &iter)) {
+	if (gtk_tree_selection_get_selected(treeSel, &tmodel, &iter)) {
 	        gtk_tree_model_get(tmodel, &iter, 0, &roomName,  -1);
 		gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
 		args = strdup(roomName);
