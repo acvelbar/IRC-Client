@@ -624,7 +624,7 @@ int main( int   argc,
     gtk_window_set_title(GTK_WINDOW(window), "IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    //gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
     
