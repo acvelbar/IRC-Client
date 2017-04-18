@@ -98,6 +98,7 @@ int sendMessage(char * host, int port, char * message, char * user, char * passw
 	}
 	
 	response[j] = '\0';
+	printf("RECIEVED: %s\n", response);
 	close(sock);
 }
 
