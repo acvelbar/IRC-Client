@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <string>
 
-#define MAX_RESPONSE (20 * 1024)
+#define MAX_RESPONSE (20480)
 
 using namespace std;
 
@@ -41,7 +41,7 @@ vector<string> roomVec;
 vector<string> roomVecNew;
 GtkWidget *roomUser;
 
-const char * host = "localhost";
+char * host = strdup("localhost");
 char * user;
 char * password;
 char * args;
@@ -78,20 +78,174 @@ int open_client(char * host, int port) {
 	return sock;
 }
 
+int sendMessage(char * host, int port, char * message, char * user, char * password, char * args, char * response) {
+	int sock = open_client(host, port);
+
+	write(sock, message, strlen(message));
+	write(sock, " ", 1);
+	write(sock, user, strlen(user));
+	write(sock, " ", 1);
+	write(sock, password, strlen(password));
+	write(sock, " ", 1);
+	write(sock, args, strlen(args));
+	write(sock, "\r\n", 2);
+
+	int i;
+	int j = 0;
+	for(i = read(sock, response + j, MAX_RESPONSE - j); i > 0; j += i);
+	
+	response[j] = '\0';
+	close(sock);
+}
+
+char * get_messages() {
+	char response[MAX_RESPONSE];
+	char * room1 = strdup(args);
+	char * room2 = strdup("0 ");
+	strcat(room2, room1);
+	sendMessage(host, port, "GET-MESSAGES", user, password, room2, response);
+	printf("user = %s, room = %s, Response here is = %s\n",user, room2, response);
+	if (!(strstr(response, "ERROR (User not in room)\r\n") != NULL) && !(strstr(response, "ERROR (Wrong password)\r\n") != NULL)) {
+		return response;
+	} else {
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages");
+		return "";
+	}
+}
+
+char* list_room()
+{
+	char temp[MAX_RESPONSE];
+	sendMessage(host, port, "LIST-ROOMS", user, password, "", temp);
+	char * temp2 = (char *) malloc(sizeof(temp) + 1);
+	temp2 = strdup(temp);
+	if (!(strstr(temp2, "DENIED\r\n") != NULL) && !(strstr(temp2, "ERROR (Wrong password)\r\n") != NULL)) {
+		free(temp2);
+		return temp;
+	} else {
+		free(temp2);
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Listing Room(Wrong Pass)");
+		return "";
+	}
+}
+
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
-
-    /* Add some messages to the window */
-    for (i = 0; i < 10; i++) {
-        gchar *msg = g_strdup_printf ("Room %d", i);
-        gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
-	                    &iter,
-                            0, msg,
-	                    -1);
-	g_free (msg);
+    char * response = strdup(list_room());
+    char *tok;
+    if(roomChange) {
+	tok = strtok (response,"\r\n");
+	while (tok != NULL) {
+		string stok(tok);
+		roomVecNew.push_back(stok);
+	        tok = strtok (NULL, "\r\n");
+	}
+	int rn = roomVecNew.size();
+	int r = roomVec.size();
+	int j;
+	int k;
+	int count = 0;
+	for(j = 0; j < roomVecNew.size(); j++) {
+		count = 0;
+		for(k = 0; k < roomVec.size(); k++) {
+			if(roomVecNew[j].compare(roomVec[k]) != 0) {
+				count++;
+			}
+			if(count == roomVec.size()) {
+				gchar *msg = g_strdup_printf (roomVecNew[j].c_str());
+				gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
+				gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg, -1);
+				g_free(msg);
+			}
+		}
+	}
+	roomVec.swap(roomVecNew);
+	roomVecNew.clear();
+    } else {
+	tok = strtok (response,"\r\n");
+	while (tok != NULL) {
+		gchar *msg = g_strdup_printf (tok);
+		gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg, -1);
+		g_free (msg);
+		roomVec.push_back(tok);
+		tok = strtok (NULL, "\r\n");
+	}
+	if(roomVec.size() > 0) {
+		roomChange = true;
+	}
     }
+}
+
+char * print_users_in_room() {
+	char response[MAX_RESPONSE];
+	sendMessage(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
+	if(strstr(response, "DENIED\r\n") != NULL) {
+		printf("Denied Print User = %s\n", user);
+		return "";
+	} else {
+		return response;
+	}
+}
+
+/* Add some text to our text widget - this is a callback that is invoked
+when our window is realized. We could also force our window to be
+realized with gtk_widget_realize, but it would have to be part of
+a hierarchy first */
+
+static void insert_text( GtkTextBuffer *buffer, const char * initialText )
+{
+   GtkTextIter iter;
+ 
+   gtk_text_buffer_get_end_iter(buffer, &iter);
+   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
+}
+   
+static GtkWidget *create_text_User( const char * initialText )
+{
+	GtkWidget *scrolled_window;
+	   
+	GtkTextBuffer *buffer;
+
+	viewUser = gtk_text_view_new ();
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
+	gtk_text_view_set_editable (GTK_TEXT_VIEW(viewUser), FALSE);
+	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), viewUser);
+	insert_text (buffer, initialText);
+	gtk_widget_show_all (scrolled_window);
+	return scrolled_window;
+}
+
+void room_changed(GtkWidget * widget, gpointer text) {
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	char *roomName;
+	int i;
+	GtkTextBuffer * buffer;
+	vector<string> userRoomVec;
+	if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(treeSel), &model, &iter)) {
+		gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
+		gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
+		args = strdup(roomName);
+		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
+		char * response2 = strdup(print_users_in_room());
+		char * tok;
+		tok = strtok (response2,"\r\n");
+		while(tok != NULL) {
+			string stok(tok); 
+			userRoomVec.push_back(stok);
+			tok = strtok (NULL, "\r\n");
+		}
+		response2 = strdup(print_users_in_room());
+		roomUser = create_text_User(strdup(response2));
+		gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
+		gtk_widget_show (roomUser);
+		
+		g_free(roomName);
+	}
 }
 
 /* Create the list of "messages" */
@@ -130,40 +284,174 @@ static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
     return scrolled_window;
 }
    
-/* Add some text to our text widget - this is a callback that is invoked
-when our window is realized. We could also force our window to be
-realized with gtk_widget_realize, but it would have to be part of
-a hierarchy first */
-
-static void insert_text( GtkTextBuffer *buffer, const char * initialText )
-{
-   GtkTextIter iter;
- 
-   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
-   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
-}
-   
 /* Create a scrolled text area that displays a "message" */
+
 static GtkWidget *create_text( const char * initialText )
 {
-   GtkWidget *scrolled_window;
-   GtkWidget *view;
-   GtkTextBuffer *buffer;
+	GtkWidget *scrolled_window;
+      
+        GtkTextBuffer *buffer;
 
-   view = gtk_text_view_new ();
-   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+	view = gtk_text_view_new ();
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+	gtk_text_view_set_editable (GTK_TEXT_VIEW(view),FALSE);
+	scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),GTK_POLICY_AUTOMATIC,GTK_POLICY_AUTOMATIC);
 
-   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+	insert_text (buffer, initialText);
+	gtk_widget_show_all (scrolled_window);
+	return scrolled_window;
+}
 
-   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (buffer, initialText);
+void update_messages(GtkWidget *widget, gpointer text)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *tmodel;
+	char *roomName;
+	int i;
+	GtkTextBuffer *buffer;
+	vector<string> userRoomVec;
+	if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(treeSel), &tmodel, &iter)) {
+	        gtk_tree_model_get(tmodel, &iter, 0, &roomName,  -1);
+		gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
+		args = strdup(roomName);
+		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+		char * response2 = strdup(get_messages());
+		char * tok;
+		tok = strtok (response2,"\r\n");
+		while (tok != NULL) {
+			string stok(tok);
+			userRoomVec.push_back(stok);
+			printf("Message: %s\n", tok);
+			tok = strtok (NULL, "\r\n");
+		}
+		response2 = strdup(get_messages());
+		messages_1 = create_text(strdup(response2));
+		gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+		gtk_widget_show (messages_1);
+		g_free(roomName);
+	}
 
-   gtk_widget_show_all (scrolled_window);
+}
 
-   return scrolled_window;
+static gboolean time_handler(GtkWidget * widget)
+{
+	if(widget->window == NULL) {
+		return FALSE;
+	}
+	update_list_rooms();
+	update_messages(widget, currentStatus);
+	room_changed(widget,currentStatus);
+	return TRUE;
+}
+
+GdkPixbuf * create_pixbuf(const gchar * filename)
+{
+	GdkPixbuf *pixbuf;
+	GError *error = NULL;
+	pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+	if (!pixbuf) {
+	        fprintf(stderr, "%s\n", error->message);
+		g_error_free(error);
+	}
+
+	return pixbuf;
+}
+
+static void entry_toggle_visibility( GtkWidget *checkbutton, GtkWidget *entry)
+{
+	gtk_entry_set_visibility (GTK_ENTRY (entry), GTK_TOGGLE_BUTTON (checkbutton)->active);
+}
+
+
+
+void send_msg()
+{
+	GtkWidget * widget;
+	char response[MAX_RESPONSE];
+	char * room;
+	if(loggedIn) {
+		if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
+			gtk_label_set_text(GTK_LABEL(currentStatus), "No Message");
+		} else {
+			strcat(room, " ");
+			strcat(room, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+			strcat(room, (char *) "\n");
+			sendMessage(host, port, "SEND-MESSAGE", user, password, room, response);
+			if (strstr(response, "OK\r\n") != NULL) {
+				update_messages(widget, currentStatus);
+				gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
+			}
+		}
+	} else {
+		gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
+	}
+}
+
+
+
+void login()
+{
+	loggedIn = true;
+	g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+	char temp[MAX_RESPONSE];
+	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
+	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
+	sendMessage(host, port, "LOG-IN", user, password, "", temp);
+	if (strstr(temp, "OK\r\n") != NULL) {
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
+		list_room();
+		update_list_rooms();
+	} else {
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
+	}
+}
+
+void signup(GtkWidget * widget, gpointer data) 
+{
+	char temp[MAX_RESPONSE];
+	user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
+	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
+	sendMessage(host, port, "ADD-USER", user, password, "", temp);
+	if(strstr(temp, "OK\r\n") != NULL) {
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
+	} else {
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Username Already Taken");
+	}
+}
+
+void create_room()
+{
+	char temp[MAX_RESPONSE];
+	args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom));
+	sendMessage(host, port, "CREATE-ROOM", user, password, args, temp);
+	if (strstr(temp, "OK\r\n") != NULL) {
+		update_list_rooms();
+		gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
+	}
+}
+
+void enter_room()
+{
+	GtkWidget * widget;
+	char temp[MAX_RESPONSE];
+	sendMessage(host, port, "ENTER-ROOM", user, password, args, temp);
+	if(strstr(temp, "OK\r\n") != NULL) {
+		room_changed(widget,currentStatus);
+		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
+	}
+}
+
+void leave_room() 
+{
+	GtkWidget * widget;
+	char response[MAX_RESPONSE];
+	sendMessage(host, port, "ENTER-ROOM", user, password, args, response);
+	if(strstr(response, "OK\r\n") != NULL) {
+		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+		room_changed(widget,currentStatus);
+	}
 }
 
 int main( int   argc,
