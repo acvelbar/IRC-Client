@@ -138,3 +138,8 @@ After doing this, you may fix the identity used for this commit with:
 [master 296f19c] Make IRCclient
  3 files changed, 41 insertions(+), 18 deletions(-)
  rewrite IRCClient (90%)
+[master 66b50b5] Make IRCclient
+ 5 files changed, 112 insertions(+), 9 deletions(-)
+ rewrite IRCClient (87%)
+ create mode 100644 chat_pic.png
+ create mode 100644 new-user-image-default.png

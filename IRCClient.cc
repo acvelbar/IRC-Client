@@ -90,9 +90,12 @@ int sendMessage(char * host, int port, char * message, char * user, char * passw
 	write(sock, args, strlen(args));
 	write(sock, "\r\n", 2);
 
-	int i;
 	int j = 0;
-	for(i = read(sock, response + j, MAX_RESPONSE - j); i > 0; j += i);
+	int i = read(sock, response + j, MAX_RESPONSE - j);
+	while(i > 0) {
+		j += i;
+		i = read(sock, response + j, MAX_RESPONSE - j);
+	}
 	
 	response[j] = '\0';
 	close(sock);
