@@ -402,7 +402,7 @@ void login()
 	char temp[MAX_RESPONSE];
 	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
 	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
-	sendMessage(host, port, "LOG-IN", user, password, "", temp);
+	sendMessage(host, port, "ADD-USER", user, password, "", temp);
 	if (strstr(temp, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
 		list_room();
