@@ -1,0 +1,54 @@
+Tue Apr 18 13:52:20 EDT 2017
++run
+Starting program: /home/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00007ffff4ba06ea in strlen () from /lib64/libc.so.6
++backtrace
+#0  0x00007ffff4ba06ea in strlen () from /lib64/libc.so.6
+#1  0x0000000000402f37 in sendMessage (host=0x616660 "localhost", port=3048, 
+    message=0x406a56 "ENTER-ROOM", user=0x701330 "superman", 
+    password=0x638ad0 "clarkkent", args=0x0, response=0x7fffffff8920 "DENIED\r\n")
+    at IRCClient.cc:90
+#2  0x0000000000404729 in enter_room () at IRCClient.cc:443
+#3  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#4  0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#5  0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#6  0x00007ffff781ffd5 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#7  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#8  0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#9  0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#10 0x00007ffff781eeb9 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#11 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#12 0x00007ffff6136f75 in g_closure_invoke () from /usr/lib64/libgobject-2.0.so.0
+#13 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#14 0x00007ffff6151854 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#15 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#16 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#17 0x00007ffff78c3d24 in gtk_propagate_event () from /usr/lib64/libgtk-x11-2.0.so.0
+#18 0x00007ffff78c41bb in gtk_main_do_event () from /usr/lib64/libgtk-x11-2.0.so.0
+#19 0x00007ffff753931c in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#20 0x00007ffff5e36c9d in g_main_context_dispatch ()
+   from /usr/lib64/libglib-2.0.so.0
+#21 0x00007ffff5e36f80 in ?? () from /usr/lib64/libglib-2.0.so.0
+#22 0x00007ffff5e372a2 in g_main_loop_run () from /usr/lib64/libglib-2.0.so.0
+#23 0x00007ffff78c3137 in gtk_main () from /usr/lib64/libgtk-x11-2.0.so.0
+#24 0x00000000004057a8 in main (argc=1, argv=0x7fffffffe788) at IRCClient.cc:630
++list
+warning: Source file is more recent than executable.
+449	
+450	void leave_room() 
+451	{
+452		GtkWidget * widget;
+453		char response[MAX_RESPONSE];
+454		sendMessage(host, port, "ENTER-ROOM", user, password, args, response);
+455		if(strstr(response, "OK\r\n") != NULL) {
+456			gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+457			room_changed(widget,currentStatus);
+458		}
++quit
