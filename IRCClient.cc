@@ -598,9 +598,9 @@ int main( int   argc,
 
     GtkWidget *check = gtk_check_button_new_with_label ("Editable");
     g_signal_connect (check, "toggled", G_CALLBACK (entry_toggle_visibility), passWord);
-    GtkWidget *image = gtk_image_new_from_file("new-user-image-default.png");
-    gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
-    gtk_widget_show (image);
+    //GtkWidget *image = gtk_image_new_from_file("new-user-image-default.png");
+    //gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
+    //gtk_widget_show (image);
 
     status = gtk_label_new("Status:");
     gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
@@ -624,7 +624,7 @@ int main( int   argc,
     gtk_window_set_title(GTK_WINDOW(window), "IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
+    //gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
     
