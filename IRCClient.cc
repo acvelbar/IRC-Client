@@ -335,6 +335,8 @@ void update_messages(GtkWidget *widget, gpointer text)
 		gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
 		gtk_widget_show (messages_1);
 		g_free(roomName);
+	} else {
+		printf("No selection");
 	}
 
 }
@@ -384,6 +386,7 @@ void send_msg()
 			strcat(room, (char *) "\n");
 			sendMessage(host, port, "SEND-MESSAGE", user, password, room, response);
 			if (strstr(response, "OK\r\n") != NULL) {
+				printf("Displaying message");
 				update_messages(widget, currentStatus);
 				gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
 			}
@@ -451,7 +454,7 @@ void leave_room()
 {
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
-	sendMessage(host, port, "ENTER-ROOM", user, password, args, response);
+	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
 		room_changed(widget,currentStatus);
@@ -515,7 +518,7 @@ int main( int   argc,
     gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
-//720
+    //720
 
     messages_1 = create_text ("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
@@ -558,7 +561,6 @@ int main( int   argc,
 
     GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 9, 10); 
-    
     gtk_widget_modify_bg (GTK_WIDGET(leave_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (leave_room_Btn); 
     g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);

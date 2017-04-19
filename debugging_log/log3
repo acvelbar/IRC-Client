@@ -1,0 +1,14 @@
+Wed Apr 19 07:42:27 EDT 2017
++start
+Temporary breakpoint 1 at 0x4048d6: file IRCClient.cc, line 463.
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe438) at IRCClient.cc:463
+463	{
++cont
+Continuing.
+[Inferior 1 (process 30839) exited normally]
+Quit
++quit
