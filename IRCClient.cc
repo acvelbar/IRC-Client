@@ -570,11 +570,11 @@ int main( int   argc,
     gtk_widget_show (login_button);
     g_signal_connect (login_button, "clicked", G_CALLBACK (login), NULL);
 
-    GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
+/*    GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
     gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 13, 14);
     gtk_widget_modify_bg (GTK_WIDGET(signup_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (signup_button);  
-    g_signal_connect (signup_button, "clicked", G_CALLBACK (signup), (gpointer) "Signup");
+    g_signal_connect (signup_button, "clicked", G_CALLBACK (signup), (gpointer) "Signup");*/
 	
     labelRoom = gtk_label_new("Enter User Name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
