@@ -87,7 +87,9 @@ int sendMessage(char * host, int port, char * message, char * user, char * passw
 	write(sock, " ", 1);
 	write(sock, password, strlen(password));
 	write(sock, " ", 1);
-	write(sock, args, strlen(args));
+	if(args != NULL) {
+		write(sock, args, strlen(args));
+	}	
 	write(sock, "\r\n", 2);
 
 	int j = 0;
@@ -442,7 +444,7 @@ void create_room()
 void enter_room()
 {
 	GtkWidget * widget;
-	char temp[MAX_RESPONSE];
+	char temp[MAX_RESPONSE];	
 	sendMessage(host, port, "ENTER-ROOM", user, password, args, temp);
 	if(strstr(temp, "OK\r\n") != NULL) {
 		room_changed(widget,currentStatus);
