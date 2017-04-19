@@ -449,6 +449,11 @@ void enter_room()
 	if(strstr(temp, "OK\r\n") != NULL) {
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
+		char *buffer;
+		sprintf(buffer, "%s entered room\n", user);
+		messages_1 = create_text(strdup(buffer));
+		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
+		gtk_widget_show (messages_1);
 	}
 }
 
@@ -460,6 +465,11 @@ void leave_room()
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
 		room_changed(widget,currentStatus);
+		char *buffer;
+		sprintf(buffer, "%s left room\n", user);
+		messages_1 = create_text(strdup(buffer));
+		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
+		gtk_widget_show (messages_1);
 	}
 }
 
