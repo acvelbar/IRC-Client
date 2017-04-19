@@ -1,0 +1,34 @@
+Wed Apr 19 07:35:57 EDT 2017
++run
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000000000404223 in send_msg () at IRCClient.cc:382
+382				strcat(room, " ");
++backtrace
+#0  0x0000000000404223 in send_msg () at IRCClient.cc:382
+#1  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#2  0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#3  0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#4  0x00007ffff781ffd5 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#5  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#6  0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#7  0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#8  0x00007ffff781eeb9 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#9  0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#10 0x00007ffff6136f75 in g_closure_invoke ()
+   from /usr/lib64/libgobject-2.0.so.0
+#11 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#12 0x00007ffff6151854 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#13 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#14 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#15 0x00007ffff78c3d24 in gtk_propagate_event ()
+   from /usr/lib64/libgtk-x11-2.0.so.0
+#16 0x00007ffff78c41bb in gtk_main_do_event ()
+ from /usr/lib64/libgtk-x11-2.0.soQuit
++quit

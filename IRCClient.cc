@@ -374,7 +374,7 @@ void send_msg()
 {
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
-	char * room;
+	char * room = strdup(args);
 	if(loggedIn) {
 		if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
 			gtk_label_set_text(GTK_LABEL(currentStatus), "No Message");
