@@ -614,8 +614,8 @@ int main( int   argc,
     gtk_widget_show(currentStatus);
 
 
-    //treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
-    //g_signal_connect(treeSel, "changed",  G_CALLBACK(room_changed), currentStatus); 
+    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
+    g_signal_connect(treeSel, "changed",  G_CALLBACK(room_changed), currentStatus); 
 
     gtk_widget_show (table);
     gtk_widget_show (window);
