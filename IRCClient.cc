@@ -28,7 +28,7 @@ GtkWidget *window;
 GtkWidget *tree_view;
 GtkWidget *messages_1;
 GtkListStore * list_users;
-GtkTable *table;
+GtkWidget *table;
 GtkTreeSelection *treeSel;
 GtkWidget *view;
 GtkWidget *viewUser;
@@ -247,7 +247,7 @@ void room_changed(GtkWidget * widget, gpointer text) {
 		}
 		response2 = strdup(print_users_in_room());
 		roomUser = create_text_User(strdup(response2));
-/*!!!!*/	gtk_table_attach_defaults (table, roomUser, 4, 8, 1, 4);
+		gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
 		gtk_widget_show (roomUser);
 		
 		g_free(roomName);
@@ -334,7 +334,7 @@ void update_messages(GtkWidget *widget, gpointer text)
 		}
 		response2 = strdup(get_messages());
 		messages_1 = create_text(strdup(response2));
-/*!!!!*/		gtk_table_attach_defaults (table, messages_1, 2, 10, 5, 11);
+		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
 		gtk_widget_show (messages_1);
 		g_free(roomName);
 	} else {
