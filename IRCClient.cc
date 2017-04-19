@@ -480,10 +480,9 @@ int main( int   argc,
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
-    GtkWidget *table;
+    //GtkWidget *table;
 
     tree_view = gtk_tree_view_new ();//FIX TREEVIEW
-    table = gtk_table_new(14,12, TRUE);
     gtk_init (&argc, &argv);
     loggedIn = false;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
