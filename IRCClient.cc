@@ -247,7 +247,7 @@ void room_changed(GtkWidget * widget, gpointer text) {
 		}
 		response2 = strdup(print_users_in_room());
 		roomUser = create_text_User(strdup(response2));
-		gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
+/*!!!!*/	gtk_table_attach_defaults (table, roomUser, 4, 8, 1, 4);
 		gtk_widget_show (roomUser);
 		
 		g_free(roomName);
@@ -334,7 +334,7 @@ void update_messages(GtkWidget *widget, gpointer text)
 		}
 		response2 = strdup(get_messages());
 		messages_1 = create_text(strdup(response2));
-		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
+/*!!!!*/		gtk_table_attach_defaults (table, messages_1, 2, 10, 5, 11);
 		gtk_widget_show (messages_1);
 		g_free(roomName);
 	} else {
@@ -509,7 +509,7 @@ int main( int   argc,
 
     labelMsg = gtk_label_new("Messages:");
     gtk_misc_set_alignment(GTK_MISC(labelMsg),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelMsg,4, 8, 4, 5, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelMsg,4, 8, 4, 5, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelMsg);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
@@ -519,7 +519,7 @@ int main( int   argc,
 
     labelUserRoom = gtk_label_new("Users In Room:");
     gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
     //720
 
@@ -533,7 +533,7 @@ int main( int   argc,
     
     labelRoom = gtk_label_new("Enter room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
 
     gtk_widget_show(labelRoom);
     gdk_color_parse ("black", &color3);
@@ -583,7 +583,7 @@ int main( int   argc,
 	
     labelRoom = gtk_label_new("Enter User Name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelRoom, 9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelRoom, 9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
 
     userName = gtk_entry_new_with_max_length(0);
     gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
@@ -591,12 +591,12 @@ int main( int   argc,
 	   
     labelUser = gtk_label_new("Username:");
     gtk_misc_set_alignment(GTK_MISC(labelUser),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelUser,10, 12, 7, 8, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelUser,10, 12, 7, 8, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUser);
 
     labelPass = gtk_label_new("Password:");
     gtk_misc_set_alignment(GTK_MISC(labelPass),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelPass,10, 12, 9, 10, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), labelPass,10, 12, 9, 10, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelPass);
 
     passWord = gtk_entry_new_with_max_length(0);
@@ -611,12 +611,12 @@ int main( int   argc,
 
     status = gtk_label_new("Status:");
     gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(status);
 
     currentStatus = gtk_label_new("Login/Signup");
     gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 11, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE (table), currentStatus,8, 11, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
     
