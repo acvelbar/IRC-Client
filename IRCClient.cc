@@ -480,9 +480,10 @@ int main( int   argc,
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
+    GtkWidget *table;
 
     tree_view = gtk_tree_view_new ();//FIX TREEVIEW
-    
+    table = gtk_table_new(14,12, TRUE);
     gtk_init (&argc, &argv);
     loggedIn = false;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -493,7 +494,7 @@ int main( int   argc,
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (14, 12, TRUE);
+    table = gtk_table_new (14, 12, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 10);
     gtk_table_set_col_spacings(GTK_TABLE (table), 10);
