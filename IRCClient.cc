@@ -338,7 +338,7 @@ void update_messages(GtkWidget *widget, gpointer text)
 		gtk_widget_show (messages_1);
 		g_free(roomName);
 	} else {
-		printf("No selection");
+		printf("No selection\n");
 	}
 
 }
@@ -481,7 +481,7 @@ int main( int   argc,
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
 
-    //tree_view = gtk_tree_view_new ();//FIX TREEVIEW
+    tree_view = gtk_tree_view_new ();//FIX TREEVIEW
     
     gtk_init (&argc, &argv);
     loggedIn = false;
