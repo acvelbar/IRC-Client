@@ -578,7 +578,7 @@ int main( int   argc,
 	
     labelRoom = gtk_label_new("Enter User Name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelRoom,9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), labelRoom, 9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
 
     userName = gtk_entry_new_with_max_length(0);
     gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
