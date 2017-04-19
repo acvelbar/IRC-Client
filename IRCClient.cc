@@ -476,6 +476,7 @@ int main( int   argc,
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
 
+    tree_view = gtk_tree_view_new ();//FIX TREEVIEW
     gtk_init (&argc, &argv);
     loggedIn = false;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
