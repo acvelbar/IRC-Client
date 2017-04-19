@@ -258,7 +258,7 @@ void room_changed(GtkWidget * widget, gpointer text) {
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
 {
     GtkWidget *scrolled_window;
-    GtkWidget *tree_view;
+    //GtkWidget *tree_view;
     //GtkListStore *model;
     GtkCellRenderer *cell;
     GtkTreeViewColumn *column;
@@ -481,7 +481,8 @@ int main( int   argc,
     GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
 
-    tree_view = gtk_tree_view_new ();//FIX TREEVIEW
+    //tree_view = gtk_tree_view_new ();//FIX TREEVIEW
+    
     gtk_init (&argc, &argv);
     loggedIn = false;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -618,7 +619,7 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), currentStatus,8, 11, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
-
+    
     treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
     g_signal_connect(treeSel, "changed",  G_CALLBACK(room_changed), currentStatus); 
 
