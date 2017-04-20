@@ -501,7 +501,7 @@ int main( int   argc,
     g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 650, 550);
-    gdk_color_parse ("#F84934", &color2);
+    gdk_color_parse ("#4D5E5F", &color2);
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
@@ -516,8 +516,6 @@ int main( int   argc,
     //update_list_rooms();
     list = create_list ("Rooms", list_rooms);
     gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 4, 0, 5);
-    gdk_color_parse ("#4D5E5F", &color);
-    gtk_widget_modify_bg (GTK_WIDGET(list), GTK_STATE_NORMAL, &color);
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE(table), TRUE);
 
@@ -554,7 +552,7 @@ int main( int   argc,
 
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 13, 14); 
-    gdk_color_parse ("#4D5E5F", &color);
+    gdk_color_parse ("#F84934", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
     g_signal_connect (send_button, "clicked", G_CALLBACK (send_msg), NULL);
     gtk_widget_show (send_button); 
@@ -570,7 +568,7 @@ int main( int   argc,
 
     GtkWidget *enter_room_Btn = gtk_button_new_with_label ("Enter Room");
     gtk_table_attach_defaults(GTK_TABLE (table), enter_room_Btn, 0, 2, 8, 9); 
-    gdk_color_parse ("#4D5E5F", &color);
+    gdk_color_parse ("#F84934", &color);
     gtk_widget_modify_bg (GTK_WIDGET(enter_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (enter_room_Btn); 
     g_signal_connect (enter_room_Btn, "clicked", G_CALLBACK (enter_room), NULL);
