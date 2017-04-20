@@ -569,7 +569,7 @@ int main( int   argc,
 
     GtkWidget *enter_room_Btn = gtk_button_new_with_label ("Enter Room");
     gtk_table_attach_defaults(GTK_TABLE (table), enter_room_Btn, 0, 2, 8, 9); 
-    gdk_color_parse ("orange", &color);
+    gdk_color_parse ("blue", &color);
     gtk_widget_modify_bg (GTK_WIDGET(enter_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (enter_room_Btn); 
     g_signal_connect (enter_room_Btn, "clicked", G_CALLBACK (enter_room), NULL);

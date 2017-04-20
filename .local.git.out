@@ -212,3 +212,7 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+), 2 deletions(-)
 [master d78d93b] Make IRCclient
  3 files changed, 12 insertions(+)
+[master 24e5235] Make IRCclient
+ 5 files changed, 60 insertions(+), 5 deletions(-)
+ create mode 100644 debugging_log/log6
+ create mode 100644 debugging_log/log7
