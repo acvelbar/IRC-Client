@@ -449,12 +449,10 @@ void enter_room()
 	if(strstr(temp, "OK\r\n") != NULL) {
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-		char buffer [100];
-		strncpy(buffer, user, sizeof(buffer));
-		strncat(buffer, " entered room\n", sizeof(buffer));
-		messages_1 = create_text(strdup(buffer));
-		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
-		gtk_widget_show (messages_1);
+		char * buffer = strdup(args);
+		strcat(buffer, user);
+		strcat(buffer, " entered room\n");
+		sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, temp);
 	}
 }
 
@@ -462,6 +460,12 @@ void leave_room()
 {
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
+	
+	char * buffer = strdup(args);
+	strcat(buffer, user);
+	strcat(buffer, " entered room\n");
+	sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, response);
+	
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
@@ -543,7 +547,7 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 6, 7);
     gtk_widget_show(entryRoom);
     
-    labelRoom = gtk_label_new("Enter room name:");
+    labelRoom = gtk_label_new("Room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE (table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelRoom);
