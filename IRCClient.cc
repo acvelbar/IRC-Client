@@ -450,6 +450,7 @@ void enter_room()
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 		char * buffer = strdup(args);
+		strcat(buffer, " ");
 		strcat(buffer, user);
 		strcat(buffer, " entered room\n");
 		sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, temp);
@@ -462,6 +463,7 @@ void leave_room()
 	char response[MAX_RESPONSE];
 	
 	char * buffer = strdup(args);
+	strcat(buffer, " ");
 	strcat(buffer, user);
 	strcat(buffer, " entered room\n");
 	sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, response);
@@ -470,12 +472,6 @@ void leave_room()
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
 		room_changed(widget,currentStatus);	
-		char buffer [100];
-		strncpy(buffer, user, sizeof(buffer));
-		strncat(buffer, " left room\n", sizeof(buffer));
-		messages_1 = create_text(strdup(buffer));
-		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
-		gtk_widget_show (messages_1);
 	}
 }
 
