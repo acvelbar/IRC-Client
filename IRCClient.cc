@@ -516,6 +516,8 @@ int main( int   argc,
     //update_list_rooms();
     list = create_list ("Rooms", list_rooms);
     gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 4, 0, 5);
+    gdk_color_parse ("#4D5E5F", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(list), GTK_STATE_NORMAL, &color);
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE(table), TRUE);
 
@@ -546,7 +548,6 @@ int main( int   argc,
     labelRoom = gtk_label_new("Enter room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE (table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
-
     gtk_widget_show(labelRoom);
     gdk_color_parse ("black", &color3);
     gtk_widget_modify_bg (GTK_WIDGET(labelRoom), GTK_STATE_NORMAL, &color3);
