@@ -252,8 +252,6 @@ void room_changed(GtkWidget * widget, gpointer text) {
 		gtk_widget_show (roomUser);
 		
 		free(response2);
-		free(tok);
-		free(roomName);
 		g_free(roomName);
 	}
 }

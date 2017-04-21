@@ -1,0 +1,46 @@
+Thu Apr 20 23:35:37 EDT 2017
++run
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGABRT, Aborted.
+0x00007ffff4ade2a7 in raise () from /lib64/libc.so.6
++list
+480		char response[MAX_RESPONSE];
+481		
+482	//	char * buffer = strdup("left room");
+483	//	send_msg2(buffer);
+484	
+485		sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
+486		if(strstr(response, "OK\r\n") != NULL) {
+487			gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+488			room_changed(widget,currentStatus);	
+489		}
++backtrace
+#0  0x00007ffff4ade2a7 in raise () from /lib64/libc.so.6
+#1  0x00007ffff4adf6fa in abort () from /lib64/libc.so.6
+#2  0x00007ffff4b1d568 in __libc_message () from /lib64/libc.so.6
+#3  0x00007ffff4b22e56 in malloc_printerr () from /lib64/libc.so.6
+#4  0x00007ffff4b2365e in _int_free () from /lib64/libc.so.6
+#5  0x0000000000403ec1 in room_changed (widget=0x67c640, text=0x6ee050) at IRCClient.cc:257
+#6  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#7  0x00007ffff6151657 in g_signal_emit_valist () from /usr/lib64/libgobject-2.0.so.0
+#8  0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#9  0x00007ffff79bf616 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#10 0x00007ffff79c3df2 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#11 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#12 0x00007ffff6136f75 in g_closure_invoke () from /usr/lib64/libgobject-2.0.so.0
+#13 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#14 0x00007ffff6151854 in g_signal_emit_valist () from /usr/lib64/libgobject-2.0.so.0
+#15 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#16 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#17 0x00007ffff78c3d24 in gtk_propagate_event () from /usr/lib64/libgtk-x11-2.0.so.0
+#18 0x00007ffff78c41bb in gtk_main_do_event () from /usr/lib64/libgtk-x11-2.0.so.0
+#19 0x00007ffff753931c in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#20 0x00007ffff5e36c9d in g_main_context_dispatch () from /usr/lib64/libglib-2.0.so.0
+#21 0x00007ffff5e36f80 in ?? () from /usr/lib64/libglib-2.0.so.0
+#22 0x00007ffff5e372a2 in g_main_loop_run () from /usr/lib64/libglib-2.0.so.0
+#23 0x00007ffff78c3137 in gtk_main () from /usr/lib64/libgtk-x11-2.0.so.0
+#24 0x0000000000405f3d in main (argc=1, argv=0x7fffffffe588) at IRCClient.cc:660
++quit

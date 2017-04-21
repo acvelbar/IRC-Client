@@ -264,3 +264,10 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 3 insertions(+), 1 deletion(-)
 [master 8d13566] Make IRCclient
  3 files changed, 5 insertions(+), 2 deletions(-)
+[master ad9c887] Make IRCclient
+ 8 files changed, 117 insertions(+)
+ create mode 100755 .nfs0000000004da126a0551672d
+ create mode 100644 debugging_log/log11
+ create mode 100644 debugging_log/log12
+ create mode 100644 debugging_log/log13
+ create mode 100644 debugging_log/log14
