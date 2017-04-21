@@ -466,9 +466,14 @@ void enter_room()
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 
-		string buffer1 = user;
-		buffer1 += " entered room";
-		send_msg2((char *) buffer1.c_str());
+	//	string buffer1 = user;
+	//	buffer1 += " entered room";
+	//	send_msg2((char *) buffer1.c_str());
+		string b1 = args;
+		b1 += " ";
+		b1 += user;
+		b1 += " entered room.";
+		sendMessage(host, port, "SEND-MESSAGE", user, password, (char *) b1.c_str(), temp);
 	}
 }
 
@@ -477,9 +482,15 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-	string buffer1 = user;
-	buffer1 += " left room";
-	send_msg2((char *) buffer1.c_str());
+//	string buffer1 = user;
+//	buffer1 += " left room";
+//	send_msg2((char *) buffer1.c_str());
+
+	string b1 = args;
+	b1 += " ";
+	b1 += user;
+	b1 += " left room.";
+	sendMessage(host, port, "SEND-MESSAGE", user, password, (char *) b1.c_str(), response);
 
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
