@@ -465,8 +465,9 @@ void enter_room()
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 
-	//	char * buffer = strdup("entered room");
-	//	send_msg2(buffer);
+		string buffer1 = user;
+		buffer1 += " entered room";
+		send_msg2((char *) buffer1.c_str());
 	}
 }
 
