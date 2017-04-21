@@ -238,7 +238,7 @@ void room_changed(GtkWidget * widget, gpointer text) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
 		args = strdup(roomName);
 		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-		char * response2 = strdup(print_users_in_room());
+		char * response2 = print_users_in_room();
 		char * tok;
 		tok = strtok (response2,"\r\n");
 		while(tok != NULL) {
@@ -246,12 +246,12 @@ void room_changed(GtkWidget * widget, gpointer text) {
 			userRoomVec.push_back(stok);
 			tok = strtok (NULL, "\r\n");
 		}
-		response2 = strdup(print_users_in_room());
+		response2 = print_users_in_room();
 		roomUser = create_text_User(strdup(response2));
 		gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
 		gtk_widget_show (roomUser);
 		
-		free(response2);
+		//free(response2);
 		g_free(roomName);
 	}
 }
@@ -478,7 +478,7 @@ void leave_room()
 	char response[MAX_RESPONSE];
 	
 	string buffer1 = user;
-	buffer1 += " entered room";
+	buffer1 += " left room";
 	send_msg2((char *) buffer1.c_str());
 
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
