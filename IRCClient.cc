@@ -391,7 +391,7 @@ static void entry_toggle_visibility( GtkWidget *checkbutton, GtkWidget *entry)
 
 void send_msg()
 {
-	GtkWidget * widget;
+//	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	char * room = strdup(args);
 	if(loggedIn) {
@@ -404,7 +404,7 @@ void send_msg()
 			sendMessage(host, port, "SEND-MESSAGE", user, password, room, response);
 			if (strstr(response, "OK\r\n") != NULL) {
 				printf("Displaying message");
-				update_messages(widget, currentStatus);
+//				update_messages(widget, currentStatus);
 				gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
 			}
 		}

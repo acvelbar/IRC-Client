@@ -280,3 +280,8 @@ After doing this, you may fix the identity used for this commit with:
  5 files changed, 26 insertions(+), 2 deletions(-)
  create mode 100644 debugging_log/log17
  create mode 100644 debugging_log/log18
+[master 987d936] Make IRCclient
+ 6 files changed, 49 insertions(+), 4 deletions(-)
+ create mode 100755 .nfs0000000004da126a05516738
+ create mode 100644 debugging_log/log19
+ create mode 100644 debugging_log/log20
