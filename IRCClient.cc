@@ -477,8 +477,9 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-//	char * buffer = strdup("left room");
-//	send_msg2(buffer);
+	string buffer1 = user;
+	buffer1 += " entered room";
+	send_msg2((char *) buffer1.c_str());
 
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
