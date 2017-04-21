@@ -473,10 +473,10 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-	char * buffer = strdup(user);
+	/*char * buffer = strdup(user);
 	strcat(buffer, " left room\n");
 	send_msg2(buffer);
-
+*/
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
