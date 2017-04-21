@@ -462,9 +462,9 @@ void enter_room()
 	if(strstr(temp, "OK\r\n") != NULL) {
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-		char * buffer = strdup(user);
+		/*char * buffer = strdup(user);
 		strcat(buffer, " entered room\n");
-		send_msg2(buffer);
+		send_msg2(buffer);*/
 	}
 }
 

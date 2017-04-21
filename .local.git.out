@@ -232,3 +232,6 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 13 insertions(+), 7 deletions(-)
 [master ba4a812] Make IRCclient
  3 files changed, 4 insertions(+), 6 deletions(-)
+[master cfd8202] Make IRCclient
+ 3 files changed, 21 insertions(+), 10 deletions(-)
+ rewrite IRCClient (72%)
