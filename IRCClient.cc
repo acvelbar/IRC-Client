@@ -525,7 +525,7 @@ int main( int   argc,
     g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 650, 550);
-    gdk_color_parse ("#4D5E5F", &color2);
+    gdk_color_parse ("#A6AEAF", &color2);
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
