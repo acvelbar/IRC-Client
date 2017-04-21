@@ -1,0 +1,86 @@
+Thu Apr 20 23:26:18 EDT 2017
++run
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGABRT, Aborted.
+0x00007ffff4ade2a7 in raise () from /lib64/libc.so.6
++list
+477		char response[MAX_RESPONSE];
+478		
+479	//	char * buffer = strdup("left room");
+480	//	send_msg2(buffer);
+481	
+482		sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
+483		if(strstr(response, "OK\r\n") != NULL) {
+484			gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+485			room_changed(widget,currentStatus);	
+486		}
++backtrace
+#0  0x00007ffff4ade2a7 in raise () from /lib64/libc.so.6
+#1  0x00007ffff4adf6fa in abort () from /lib64/libc.so.6
+#2  0x00007ffff4b22918 in __malloc_assert () from /lib64/libc.so.6
+#3  0x00007ffff4b24566 in sysmalloc () from /lib64/libc.so.6
+#4  0x00007ffff4b255eb in _int_malloc () from /lib64/libc.so.6
+#5  0x00007ffff4b25ea1 in _int_realloc () from /lib64/libc.so.6
+#6  0x00007ffff4b272b9 in realloc () from /lib64/libc.so.6
+#7  0x00007ffff6dfdfb4 in ?? () from /usr/lib64/libcairo.so.2
+#8  0x00007ffff6dfe417 in ?? () from /usr/lib64/libcairo.so.2
+#9  0x00007ffff6dfe549 in ?? () from /usr/lib64/libcairo.so.2
+#10 0x00007ffff6dfe91e in ?? () from /usr/lib64/libcairo.so.2
+#11 0x00007ffff6dce3cf in ?? () from /usr/lib64/libcairo.so.2
+#12 0x00007ffff6decc45 in ?? () from /usr/lib64/libcairo.so.2
+#13 0x00007ffff6decb9c in ?? () from /usr/lib64/libcairo.so.2
+#14 0x00007ffff6decbb7 in ?? () from /usr/lib64/libcairo.so.2
+#15 0x00007ffff6decf5e in ?? () from /usr/lib64/libcairo.so.2
+#16 0x00007ffff6dceb92 in ?? () from /usr/lib64/libcairo.so.2
+#17 0x00007ffff6dc61f9 in ?? () from /usr/lib64/libcairo.so.2
+#18 0x00007ffff6dcf9ab in ?? () from /usr/lib64/libcairo.so.2
+#19 0x00007ffff6e02f29 in ?? () from /usr/lib64/libcairo.so.2
+#20 0x00007ffff6da82c1 in ?? () from /usr/lib64/libcairo.so.2
+#21 0x00007ffff6e1dd49 in ?? () from /usr/lib64/libcairo.so.2
+#22 0x00007ffff6def7e6 in ?? () from /usr/lib64/libcairo.so.2
+#23 0x00007ffff6db0022 in ?? () from /usr/lib64/libcairo.so.2
+#24 0x00007ffff6da9c09 in ?? () from /usr/lib64/libcairo.so.2
+#25 0x00007ffff6da2c25 in cairo_stroke () from /usr/lib64/libcairo.so.2
+#26 0x00007fffef9ecf0c in ?? () from /usr/lib64/gtk-2.0/2.10.0/engines/libindustrial.so
+#27 0x00007fffef9edfe1 in ?? () from /usr/lib64/gtk-2.0/2.10.0/engines/libindustrial.so
+#28 0x00007fffef9efe88 in ?? () from /usr/lib64/gtk-2.0/2.10.0/engines/libindustrial.so
+#29 0x00007ffff781f475 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#30 0x00007ffff781f67d in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#31 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#32 0x00007ffff6136ecf in g_closure_invoke () from /usr/lib64/libgobject-2.0.so.0
+#33 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#34 0x00007ffff6151854 in g_signal_emit_valist () from /usr/lib64/libgobject-2.0.so.0
+#35 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#36 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#37 0x00007ffff784b048 in gtk_container_propagate_expose () from /usr/lib64/libgtk-x11-2.0.so.0
+#38 0x00007ffff7949e38 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#39 0x00007ffff7849b0c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#40 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#41 0x00007ffff6136ecf in g_closure_invoke () from /usr/lib64/libgobject-2.0.so.0
+#42 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#43 0x00007ffff6151854 in g_signal_emit_valist () from /usr/lib64/libgobject-2.0.so.0
+#44 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#45 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#46 0x00007ffff784b048 in gtk_container_propagate_expose () from /usr/lib64/libgtk-x11-2.0.so.0
+#47 0x00007ffff7849b0c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#48 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#49 0x00007ffff6136f75 in g_closure_invoke () from /usr/lib64/libgobject-2.0.so.0
+#50 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#51 0x00007ffff6151854 in g_signal_emit_valist () from /usr/lib64/libgobject-2.0.so.0
+#52 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#53 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#54 0x00007ffff78c4362 in gtk_main_do_event () from /usr/lib64/libgtk-x11-2.0.so.0
+#55 0x00007ffff752039f in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#56 0x00007ffff751ce98 in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#57 0x00007ffff751d7c8 in gdk_window_process_all_updates () from /usr/lib64/libgdk-x11-2.0.so.0
+#58 0x00007ffff78497a1 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#59 0x00007ffff74fc5a7 in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#60 0x00007ffff5e36bad in g_main_context_dispatch () from /usr/lib64/libglib-2.0.so.0
+#61 0x00007ffff5e36f80 in ?? () from /usr/lib64/libglib-2.0.so.0
+#62 0x00007ffff5e372a2 in g_main_loop_run () from /usr/lib64/libglib-2.0.so.0
+#63 0x00007ffff78c3137 in gtk_main () from /usr/lib64/libgtk-x11-2.0.so.0
+#64 0x0000000000405f19 in main (argc=1, argv=0x7fffffffe588) at IRCClient.cc:657
++quit

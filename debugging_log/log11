@@ -1,0 +1,7 @@
+Thu Apr 20 23:23:00 EDT 2017
++run
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 13149) exited normally]
++quit

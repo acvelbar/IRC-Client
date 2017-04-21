@@ -251,6 +251,9 @@ void room_changed(GtkWidget * widget, gpointer text) {
 		gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
 		gtk_widget_show (roomUser);
 		
+		free(response2);
+		free(tok);
+		free(roomName);
 		g_free(roomName);
 	}
 }
