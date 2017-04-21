@@ -399,6 +399,19 @@ void send_msg()
 }
 
 
+void send_msg2(char * msg)
+{
+	char response[MAX_RESPONSE];
+	char * room = strdup(args);
+	if(loggedIn) {
+		strcat(room, " ");
+		strcat(room, msg);
+		strcat(room, (char *) "\n");
+		sendMessage(host, port, "SEND-MESSAGE", user, password, room, response);
+	} else {
+		gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
+	}
+}
 
 void login()
 {
@@ -449,11 +462,9 @@ void enter_room()
 	if(strstr(temp, "OK\r\n") != NULL) {
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-		char * buffer = strdup(args);
-		strcat(buffer, " ");
-		strcat(buffer, user);
+		char * buffer = strdup(user);
 		strcat(buffer, " entered room\n");
-		sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, temp);
+		send_msg2(buffer);
 	}
 }
 
@@ -462,12 +473,10 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-	char * buffer = strdup(args);
-	strcat(buffer, " ");
-	strcat(buffer, user);
-	strcat(buffer, " entered room\n");
-	sendMessage(host, port, "SEND-MESSAGE", user, password, buffer, response);
-	
+	char * buffer = strdup(user);
+	strcat(buffer, " left room\n");
+	send_msg2(buffer);
+
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
