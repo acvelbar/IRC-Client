@@ -451,8 +451,8 @@ void enter_room()
 		room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 
-		char * buffer = strdup("entered room");
-		send_msg2(buffer);
+	//	char * buffer = strdup("entered room");
+	//	send_msg2(buffer);
 	}
 }
 
@@ -461,8 +461,8 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-	char * buffer = strdup("left room");
-	send_msg2(buffer);
+//	char * buffer = strdup("left room");
+//	send_msg2(buffer);
 
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
