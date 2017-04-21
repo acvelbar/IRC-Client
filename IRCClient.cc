@@ -341,7 +341,7 @@ void update_messages(GtkWidget *widget, gpointer text)
 		while(getline(ss, to, '\n')) {
 			to = to.substr(to.find(" ") + 1);
 			resp3 += to.substr(0, to.find(" "));
-			resp3 += ":\t";
+			resp3 += ":    ";
 			resp3 += to.substr(to.find(" ") + 1);
 
 		}
