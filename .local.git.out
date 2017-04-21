@@ -253,3 +253,8 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100755 .nfs0000000004da126a0550fce5
  create mode 100644 debugging_log/log8
  create mode 100644 debugging_log/log9
+[master 2b43747] Make IRCclient
+ 6 files changed, 37 insertions(+), 1 deletion(-)
+ delete mode 100755 .nfs0000000004da126a0550fce5
+ rewrite IRCClient (94%)
+ create mode 100644 debugging_log/log10
