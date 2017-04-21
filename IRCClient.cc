@@ -107,7 +107,7 @@ int sendMessage(char * host, int port, char * message, char * user, char * passw
 char * get_messages() {
 	char response[MAX_RESPONSE];
 	char * room1 = strdup(args);
-	char * room2 = strdup("0 ");
+	char * room2 = strdup("-1 ");
 	strcat(room2, room1);
 	sendMessage(host, port, "GET-MESSAGES", user, password, room2, response);
 	printf("user = %s, room = %s, Response here is = %s\n",user, room2, response);
@@ -430,18 +430,6 @@ void login()
 	}
 }
 
-void signup(GtkWidget * widget, gpointer data) 
-{
-	char temp[MAX_RESPONSE];
-	user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
-	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
-	sendMessage(host, port, "ADD-USER", user, password, "", temp);
-	if(strstr(temp, "OK\r\n") != NULL) {
-		gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
-	} else {
-		gtk_label_set_text(GTK_LABEL(currentStatus),"Username Already Taken");
-	}
-}
 
 void create_room()
 {
