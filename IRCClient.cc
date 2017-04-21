@@ -18,6 +18,7 @@
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <sstream>
 
 #define MAX_RESPONSE (20480)
 
@@ -333,7 +334,16 @@ void update_messages(GtkWidget *widget, gpointer text)
 			tok = strtok (NULL, "\r\n");
 		}
 		response2 = strdup(get_messages());
-		messages_1 = create_text(strdup(response2));
+		
+		string resp3;
+		stringstream ss(response2);
+		string to;
+		while(getline(ss, to, '\n')) {
+			resp3 += to.substr(to.find(" ") + 1);
+		}
+
+		
+		messages_1 = create_text(strdup(resp3.c_str()));
 		gtk_table_attach_defaults (GTK_TABLE(table), messages_1, 2, 10, 5, 11);
 		gtk_widget_show (messages_1);
 		g_free(roomName);

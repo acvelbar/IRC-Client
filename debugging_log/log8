@@ -3,3 +3,17 @@ Thu Apr 20 22:29:38 EDT 2017
 Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 24935) exited with code 01]
++start
+`/u/data/u88/acvelbar/cs240/lab11-src/IRCClient' has changed; re-reading symbols.
+Temporary breakpoint 1 at 0x404905: file IRCClient.cc, line 476.
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Temporary breakpoint 1, main (argc=1, argv=0x7fffffffe588) at IRCClient.cc:476
+476	{
++cont
+Continuing.
+[Inferior 1 (process 705) exited normally]
++quit
