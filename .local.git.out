@@ -295,3 +295,8 @@ After doing this, you may fix the identity used for this commit with:
  rename .nfs0000000004da3e1d05516750 => .nfs0000000004da126a05516769 (66%)
  create mode 100644 debugging_log/log23
  create mode 100644 debugging_log/log24
+[master 73d85ed] Make IRCclient
+ 7 files changed, 24 insertions(+), 1 deletion(-)
+ delete mode 100755 .nfs0000000004da126a05516769
+ create mode 100644 debugging_log/log25
+ create mode 100644 debugging_log/log26

@@ -436,7 +436,7 @@ void login()
 	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
 	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
 	sendMessage(host, port, "ADD-USER", user, password, "", temp);
-	if (strstr(temp, "OK\r\n") != NULL) {
+	if (strstr(temp, "OK") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
 		list_room();
 		update_list_rooms();
