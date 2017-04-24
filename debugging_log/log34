@@ -1,0 +1,32 @@
+Sun Apr 23 23:45:26 EDT 2017
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 16267) exited with code 01]
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGINT, Interrupt.
+0x00007ffff4b8bd30 in __poll_nocancel () from /lib64/libc.so.6
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGABRT, Aborted.
+0x00007ffff4ade2a7 in raise () from /lib64/libc.so.6
++list
+490		b1 += " ";
+491		b1 += user;
+492		b1 += " left room.";
+493		sendMessage(host, port, "SEND-MESSAGE", user, password, (char *) b1.c_str(), response);
+494	
+495		sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
+496		if(strstr(response, "OK\r\n") != NULL) {
+497			gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+498			room_changed(widget,currentStatus);	
+499		}
++quit

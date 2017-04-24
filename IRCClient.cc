@@ -463,7 +463,7 @@ void enter_room()
 	char temp[MAX_RESPONSE];	
 	sendMessage(host, port, "ENTER-ROOM", user, password, args, temp);
 	if(strstr(temp, "OK\r\n") != NULL) {
-		room_changed(widget,currentStatus);
+		//room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 
 	//	string buffer1 = user;
@@ -495,7 +495,7 @@ void leave_room()
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
-		room_changed(widget,currentStatus);	
+		//room_changed(widget,currentStatus);	
 	}
 }
 
