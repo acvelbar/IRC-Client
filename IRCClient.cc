@@ -452,7 +452,7 @@ void create_room()
 	args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom));
 	sendMessage(host, port, "CREATE-ROOM", user, password, args, temp);
 	if (strstr(temp, "OK\r\n") != NULL) {
-		update_list_rooms();
+		//update_list_rooms();
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
 	}
 }
