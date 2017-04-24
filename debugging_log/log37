@@ -1,0 +1,63 @@
+Mon Apr 24 00:04:51 EDT 2017
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00007ffff5e7aab5 in g_mutex_lock () from /usr/lib64/libglib-2.0.so.0
++list
+490		b1 += " ";
+491		b1 += user;
+492		b1 += " left room.";
+493		sendMessage(host, port, "SEND-MESSAGE", user, password, (char *) b1.c_str(), response);
+494	
+495		sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
+496		if(strstr(response, "OK\r\n") != NULL) {
+497			gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+498			//room_changed(widget,currentStatus);	
+499		}
++backtrace
+#0  0x00007ffff5e7aab5 in g_mutex_lock () from /usr/lib64/libglib-2.0.so.0
+#1  0x00007ffff5e34f2a in g_source_set_priority ()
+   from /usr/lib64/libglib-2.0.so.0
+#2  0x00007ffff5e37b32 in g_idle_source_new () from /usr/lib64/libglib-2.0.so.0
+#3  0x00007ffff5e37b5e in g_idle_add_full () from /usr/lib64/libglib-2.0.so.0
+#4  0x00007ffff784974e in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#5  0x00007ffff7930845 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#6  0x00007ffff78b6948 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#7  0x00007ffff78b7896 in gtk_label_set_text ()
+   from /usr/lib64/libgtk-x11-2.0.so.0
+#8  0x0000000000404a3e in send_msg () at IRCClient.cc:408
+#9  0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#10 0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#11 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#12 0x00007ffff781ffd5 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#13 0x00007ffff61371a4 in ?? () from /usr/lib64/libgobject-2.0.so.0
+#14 0x00007ffff6151657 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#15 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#16 0x00007ffff781eeb9 in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#17 0x00007ffff78c55df in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#18 0x00007ffff6136f75 in g_closure_invoke ()
+   from /usr/lib64/libgobject-2.0.so.0
+#19 0x00007ffff61491ba in ?? () from /usr/lib64/libgobject-2.0.so.0
+#20 0x00007ffff6151854 in g_signal_emit_valist ()
+   from /usr/lib64/libgobject-2.0.so.0
+#21 0x00007ffff6151fc7 in g_signal_emit () from /usr/lib64/libgobject-2.0.so.0
+#22 0x00007ffff79dc63c in ?? () from /usr/lib64/libgtk-x11-2.0.so.0
+#23 0x00007ffff78c3d24 in gtk_propagate_event ()
+   from /usr/lib64/libgtk-x11-2.0.so.0
+#24 0x00007ffff78c41bb in gtk_main_do_event ()
+   from /usr/lib64/libgtk-x11-2.0.so.0
+#25 0x00007ffff753931c in ?? () from /usr/lib64/libgdk-x11-2.0.so.0
+#26 0x00007ffff5e36c9d in g_main_context_dispatch ()
+   from /usr/lib64/libglib-2.0.so.0
+#27 0x00007ffff5e36f80 in ?? () from /usr/lib64/libglib-2.0.so.0
+#28 0x00007ffff5e372a2 in g_main_loop_run () from /usr/lib64/libglib-2.0.so.0
+#29 0x00007ffff78c3137 in gtk_main () from /usr/lib64/libgtk-x11-2.0.so.0
+#30 0x0000000000406044 in main (argc=1, argv=0x7fffffffe588)
+    at IRCClient.cc:670
+Quit
++quit

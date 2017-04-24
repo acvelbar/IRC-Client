@@ -1,0 +1,6 @@
+Mon Apr 24 00:04:59 EDT 2017
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 23584) exited with code 01]
