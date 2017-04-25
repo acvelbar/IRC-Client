@@ -346,3 +346,5 @@ After doing this, you may fix the identity used for this commit with:
  5 files changed, 8 insertions(+), 9 deletions(-)
  delete mode 100644 chat_pic.png
  delete mode 100644 new-user-image-default.png
+[master 380a2ed] Make IRCclient
+ 3 files changed, 5 insertions(+), 1 deletion(-)

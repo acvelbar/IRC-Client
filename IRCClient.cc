@@ -1,7 +1,6 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <time.h>
 #include <curses.h>
 #include <sys/types.h>
@@ -369,19 +368,6 @@ static gboolean time_handler(GtkWidget * widget)
 	return TRUE;
 }
 
-GdkPixbuf * create_pixbuf(const gchar * filename)
-{
-	GdkPixbuf *pixbuf;
-	GError *error = NULL;
-	pixbuf = gdk_pixbuf_new_from_file(filename, &error);
-	if (!pixbuf) {
-	        fprintf(stderr, "%s\n", error->message);
-		g_error_free(error);
-	}
-
-	return pixbuf;
-}
-
 static void entry_toggle_visibility( GtkWidget *checkbutton, GtkWidget *entry)
 {
 	gtk_entry_set_visibility (GTK_ENTRY (entry), GTK_TOGGLE_BUTTON (checkbutton)->active);
@@ -452,7 +438,6 @@ void create_room()
 	args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom));
 	sendMessage(host, port, "CREATE-ROOM", user, password, args, temp);
 	if (strstr(temp, "OK\r\n") != NULL) {
-		//update_list_rooms();
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
 	}
 }
@@ -463,12 +448,7 @@ void enter_room()
 	char temp[MAX_RESPONSE];	
 	sendMessage(host, port, "ENTER-ROOM", user, password, args, temp);
 	if(strstr(temp, "OK\r\n") != NULL) {
-		//room_changed(widget,currentStatus);
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-
-	//	string buffer1 = user;
-	//	buffer1 += " entered room";
-	//	send_msg2((char *) buffer1.c_str());
 		string b1 = args;
 		b1 += " ";
 		b1 += user;
@@ -482,10 +462,6 @@ void leave_room()
 	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	
-//	string buffer1 = user;
-//	buffer1 += " left room";
-//	send_msg2((char *) buffer1.c_str());
-
 	string b1 = args;
 	b1 += " ";
 	b1 += user;
@@ -495,7 +471,6 @@ void leave_room()
 	sendMessage(host, port, "LEAVE-ROOM", user, password, args, response);
 	if(strstr(response, "OK\r\n") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
-		//room_changed(widget,currentStatus);	
 	}
 }
 
@@ -512,9 +487,9 @@ int main( int   argc,
     GdkColor color3;
     GtkWidget *status;
     GtkWidget *labelMsg;
+    GtkWidget *labelUser;
     GtkWidget *labelPass;
     GtkWidget *labelRoom;
-    GtkWidget *labelUser;
     GtkWidget *labelUserRoom;
     //GtkWidget *table;
 
@@ -537,7 +512,6 @@ int main( int   argc,
 
     // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
-    //update_list_rooms();
     list = create_list ("Rooms", list_rooms);
     gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 4, 0, 5);
     gtk_widget_show (list);
@@ -557,7 +531,6 @@ int main( int   argc,
     gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE (table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
-    //720
 
     messages_1 = create_text ("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
@@ -633,9 +606,6 @@ int main( int   argc,
 
     GtkWidget *check = gtk_check_button_new_with_label ("Editable");
     g_signal_connect (check, "toggled", G_CALLBACK (entry_toggle_visibility), passWord);
-    //GtkWidget *image = gtk_image_new_from_file("new-user-image-default.png");
-    //gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
-    //gtk_widget_show (image);
 
     status = gtk_label_new("Status:");
     gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
@@ -658,10 +628,8 @@ int main( int   argc,
     gtk_window_set_title(GTK_WINDOW(window), "IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    //gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
     
     return 0;
 }
-
