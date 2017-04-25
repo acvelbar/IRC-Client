@@ -432,8 +432,8 @@ void login()
 {
 	
 	
-	//loggedIn = true;
-	//g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+	loggedIn = true;
+	g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
 
 	char temp[MAX_RESPONSE];
 	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
@@ -441,13 +441,10 @@ void login()
 	sendMessage(host, port, "ADD-USER", user, password, "", temp);
 	if (strstr(temp, "OK") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
-		loggedIn = true;
-		g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
-		//list_room();
-		//update_list_rooms();
+		//loggedIn = true;
+		//g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
 	} else {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
-		login();
 	}
 }
 
