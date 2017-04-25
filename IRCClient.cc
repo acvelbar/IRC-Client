@@ -87,8 +87,8 @@ int sendMessage(char * host, int port, char * message, char * user, char * passw
 	write(sock, user, strlen(user));
 	write(sock, " ", 1);
 	write(sock, password, strlen(password));
-	write(sock, " ", 1);
-	if(args != NULL) {
+	if(args != NULL && strlen(args) > 0) {
+		write(sock, " ", 1);
 		write(sock, args, strlen(args));
 	}	
 	write(sock, "\r\n", 2);
