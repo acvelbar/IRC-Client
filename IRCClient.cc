@@ -447,6 +447,7 @@ void login()
 		//update_list_rooms();
 	} else {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
+		login();
 	}
 }
 
