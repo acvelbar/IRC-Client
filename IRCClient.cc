@@ -607,7 +607,7 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), login_button, 10, 12, 12, 13);    
     gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (login_button);
-    g_signal_connect (login_button, "clicked", G_CALLBACK (login), (gpointer) "Login");
+    g_signal_connect (login_button, "clicked", G_CALLBACK (login), NULL);
 	
     labelRoom = gtk_label_new("Enter User Name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
