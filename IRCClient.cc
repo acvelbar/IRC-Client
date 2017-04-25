@@ -441,7 +441,7 @@ void login()
 		//loggedIn = true;
 		//g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
 	} else {
-		gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
+		gtk_label_set_text(GTK_LABEL(currentStatus),"OK Login");
 	}
 }
 
