@@ -330,3 +330,5 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100644 debugging_log/log40
 [master 3a40ba0] Make IRCclient
  3 files changed, 6 insertions(+), 2 deletions(-)
+[master 689d880] Make IRCclient
+ 3 files changed, 4 insertions(+), 2 deletions(-)
