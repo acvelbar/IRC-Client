@@ -340,3 +340,5 @@ After doing this, you may fix the identity used for this commit with:
  3 files changed, 7 insertions(+)
 [master 43b6e4d] Make IRCclient
  3 files changed, 3 insertions(+)
+[master 974d8c6] Make IRCclient
+ 3 files changed, 6 insertions(+), 7 deletions(-)

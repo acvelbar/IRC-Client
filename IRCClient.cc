@@ -20,7 +20,7 @@
 #include <string>
 #include <sstream>
 
-#define MAX_RESPONSE (20480)
+#define MAX_RESPONSE (10 * 1024)
 
 using namespace std;
 
@@ -33,10 +33,10 @@ GtkWidget *table;
 GtkTreeSelection *treeSel;
 GtkWidget *view;
 GtkWidget *viewUser;
-GtkWidget *userName; //entry
-GtkWidget *passWord; //entry
-GtkWidget *currentStatus; //label
-GtkWidget *entryRoom; //entry
+GtkWidget *userName; //entry space
+GtkWidget *passWord; //entry space
+GtkWidget *currentStatus;
+GtkWidget *entryRoom; //entry space
 GtkWidget *messageEntry;
 vector<string> roomVec;
 vector<string> roomVecNew;
@@ -391,7 +391,6 @@ static void entry_toggle_visibility( GtkWidget *checkbutton, GtkWidget *entry)
 
 void send_msg()
 {
-//	GtkWidget * widget;
 	char response[MAX_RESPONSE];
 	char * room = strdup(args);
 	if(loggedIn) {
@@ -404,7 +403,6 @@ void send_msg()
 			sendMessage(host, port, "SEND-MESSAGE", user, password, room, response);
 			if (strstr(response, "OK\r\n") != NULL) {
 				printf("Displaying message");
-//				update_messages(widget, currentStatus);
 				gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
 			}
 		}
@@ -429,8 +427,7 @@ void send_msg2(char * msg)
 }
 
 void login()
-{
-	
+{	
 	
 	loggedIn = true;
 	g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
