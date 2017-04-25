@@ -4,3 +4,15 @@ Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib64/libthread_db.so.1".
 [Inferior 1 (process 23549) exited with code 01]
++r
+`/u/data/u88/acvelbar/cs240/lab11-src/IRCClient' has changed; re-reading symbols.
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 29795) exited normally]
++r
+Starting program: /u/data/u88/acvelbar/cs240/lab11-src/IRCClient 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib64/libthread_db.so.1".
+[Inferior 1 (process 29829) exited normally]
++q

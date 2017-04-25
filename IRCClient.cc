@@ -438,8 +438,8 @@ void login()
 	sendMessage(host, port, "ADD-USER", user, password, "", temp);
 	if (strstr(temp, "OK") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
-		list_room();
-		update_list_rooms();
+		//list_room();
+		//update_list_rooms();
 	} else {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
 	}
