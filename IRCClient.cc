@@ -430,6 +430,11 @@ void send_msg2(char * msg)
 
 void login()
 {
+	
+	
+	//loggedIn = true;
+	//g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+
 	char temp[MAX_RESPONSE];
 	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
 	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
