@@ -324,3 +324,7 @@ After doing this, you may fix the identity used for this commit with:
  create mode 100644 debugging_log/log37
  create mode 100644 debugging_log/log38
  create mode 100644 debugging_log/log39
+[master aaedcab] Make IRCclient
+ 7 files changed, 34 insertions(+), 2 deletions(-)
+ delete mode 100755 .nfs0000000004da3e3c09bbf7d5
+ create mode 100644 debugging_log/log40

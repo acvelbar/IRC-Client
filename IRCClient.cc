@@ -430,14 +430,14 @@ void send_msg2(char * msg)
 
 void login()
 {
-	loggedIn = true;
-	g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
 	char temp[MAX_RESPONSE];
 	user = (char*) gtk_entry_get_text(GTK_ENTRY(userName));
 	password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
 	sendMessage(host, port, "ADD-USER", user, password, "", temp);
 	if (strstr(temp, "OK") != NULL) {
 		gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
+		loggedIn = true;
+		g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
 		//list_room();
 		//update_list_rooms();
 	} else {
